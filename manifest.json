@@ -1,0 +1,17 @@
+{
+  "name": "JBoss Jira Content Script",
+  "version": "0.1",
+  "permissions": [
+    "http://github.com/*",
+    "https://github.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["http://github.com/*", "https://github.com/*"],
+      "js": ["jboss-jira-content-script.js"],
+      "css": ["jboss-jira-content-script.css"],
+      "run_at": "document_end"
+    }
+  ],
+  "manifest_version": 2
+}
