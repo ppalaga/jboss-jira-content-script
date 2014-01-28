@@ -20,7 +20,7 @@ function traverseDom(node, func) {
     }
 }
 
-var linkJira = function (node) {
+function linkJira(node) {
     if (node.nodeType == 3 && node.nodeValue.trim().length > 0) {
             var matches = node.nodeValue.match(jiraRe);
             if (matches) {
@@ -48,5 +48,11 @@ var linkJira = function (node) {
                 }
             }
     }
+}
+
+var nodeHandlers = function (node) {
+    linkJira(node);
 };
-traverseDom(document.body, linkJira);
+
+traverseDom(document.body, nodeHandlers);
+
