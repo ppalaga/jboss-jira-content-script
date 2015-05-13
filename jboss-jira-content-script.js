@@ -1,6 +1,15 @@
 
 var currentA = null;
-var jiraRe = new RegExp("(JDF|GTNPORTAL|GTNCOMMON|MODE|GTNWCM|JBIDE|JBQA|JBDS|TOOLSDOC|AS7|JBPAPP6|JBPAPP|FORGE|FORGEPLUGINS|ARQ|SHRINKRES|SHRINKWRAP|SHRINKDESC|ARQGRA|RF|RFPL|RFSBOX)-[0-9]+", "g");
+var jiraRe = new RegExp("("
+        /* GateIn */
+        + "|GTNPORTAL|GTNCOMMON|GTNWCM"
+        /* Hawkular */
+        + "|HAWKULAR|HWKALERTS|HWKBTM|HWKINVENT|HWKMETRICS"
+        /* WildFly */
+        + "|WFLY|WFCORE"
+        /* Misc */
+        + "|JDF|MODE|JBIDE|JBQA|JBDS|TOOLSDOC|AS7|JBPAPP6|JBPAPP|FORGE|FORGEPLUGINS|ARQ|SHRINKRES|SHRINKWRAP|SHRINKDESC|ARQGRA|RF|RFPL|RFSBOX"
+        + ")-[0-9]+", "g");
 var bugzillaRe = new RegExp("(BZ|Bug)[ #\\-]?[0-9]+", "gi");
 
 function traverseDom(node, func) {
