@@ -2,7 +2,7 @@
 var currentA = null;
 var jiraRe = new RegExp("("
         /* GateIn */
-        + "|GTNPORTAL|GTNCOMMON|GTNWCM"
+        + "GTNPORTAL|GTNCOMMON|GTNWCM"
         /* Hawkular */
         + "|HAWKULAR|HWKALERTS|HWKBTM|HWKINVENT|HWKMETRICS"
         /* WildFly */
