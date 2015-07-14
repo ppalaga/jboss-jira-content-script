@@ -5,10 +5,12 @@ var jiraRe = new RegExp("("
         + "GTNPORTAL|GTNCOMMON|GTNWCM"
         /* Hawkular */
         + "|HAWKULAR|HWKALERTS|HWKBTM|HWKINVENT|HWKMETRICS"
-        /* WildFly */
-        + "|WFLY|WFCORE|UNDERTOW"
+        /* JBoss Tools */
+        + "|JBIDE|JBDS|TOOLSDOC"
+        /* JBoss AS, WildFly and EAP */
+        + "AS7|JBAS|JBPAPP6|WFLY|WFCORE|UNDERTOW"
         /* Misc */
-        + "|JDF|MODE|JBIDE|JBQA|JBDS|TOOLSDOC|AS7|JBPAPP6|JBPAPP|FORGE|FORGEPLUGINS|ARQ|SHRINKRES|SHRINKWRAP|SHRINKDESC|ARQGRA|RF|RFPL|RFSBOX"
+        + "|ARQ|ARQGRA|JBQA|JBPAPP|FORGE|FORGEPLUGINS|JDF|HIBERNATE|MODE|SHRINKRES|SHRINKWRAP|SHRINKDESC|RF|RFPL|RFSBOX"
         + ")-[0-9]+", "g");
 var bugzillaRe = new RegExp("(BZ|Bug)[ #\\-]?[0-9]+", "gi");
 
