@@ -5,6 +5,8 @@ var jiraRe = new RegExp("("
         + "GTNPORTAL|GTNCOMMON|GTNWCM"
         /* Hawkular */
         + "|HAWKULAR|HWKAGENT|HWKALERTS|HWKBTM|HWKINVENT|HWKMETRICS"
+        /* Keycloak */
+        + "|KEYCLOAK"
         /* JBoss Tools */
         + "|JBIDE|JBDS|TOOLSDOC"
         /* JBoss AS, WildFly and EAP */
