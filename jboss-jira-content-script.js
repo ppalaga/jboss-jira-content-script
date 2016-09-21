@@ -9,9 +9,10 @@ var jiraRe = new RegExp("("
         + "|KEYCLOAK"
         /* JBoss Tools */
         + "|JBIDE|JBDS|TOOLSDOC"
-        /* JBoss AS, WildFly and EAP */
-        + "|AS7|JBAS|JBPAPP6|WFLY|WFCORE|UNDERTOW"
-        /* JBoss AS, WildFly and EAP deps */
+        /* JBoss AS, EAP */
+        + "|AS7|JBAS|JBPAPP6|JBEAP"
+        /* WildFly and its deps */
+        + "|WFLY|WFCORE|UNDERTOW"
         + "|DMR|EJBCLIENT|HIBERNATE|JBADMCON|JBMANCON|JBASMP|JBASM|JBBOOT|JBCLUSTER|EMB|JBEE|LOGMGR|JBMETA|MODULES|JBPROFILE"
         + "|RELOADED|MSC|SVCBIND|WFARQ|WFCOM|WFTC"
         /* Misc */
