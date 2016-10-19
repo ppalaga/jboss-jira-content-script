@@ -1,26 +1,59 @@
 
 var currentA = null;
-var jiraRe = new RegExp("("
-        /* GateIn */
-        + "GTNPORTAL|GTNCOMMON|GTNWCM"
-        /* Hawkular */
-        + "|HAWKULAR|HWKAGENT|HWKALERTS|HWKBTM|HWKINVENT|HWKMETRICS"
-        /* Keycloak */
-        + "|KEYCLOAK"
-        /* JBoss Tools */
-        + "|JBIDE|JBDS|TOOLSDOC"
-        /* JBoss AS, EAP */
-        + "|AS7|JBAS|JBPAPP6|JBEAP"
-        /* WildFly and its deps */
-        + "|WFLY|WFCORE|UNDERTOW"
-        + "|DMR|EJBCLIENT|EMB"
-        + "|HAL|HIBERNATE"
-        + "|JBADMCON|JBMANCON|JBASMP|JBASM|JBBOOT|JBCLUSTER|JBEE|JBMETA|JBPROFILE|JBTM|LOGMGR|MODULES"
-        + "|RELOADED|MSC|SVCBIND|WFARQ|WFCOM|WFTC"
-        /* Misc */
-        + "|ARQ|ARQGRA|JBQA|JBPAPP|FORGE|FORGEPLUGINS|JDF|MODE|SHRINKRES|SHRINKWRAP|SHRINKDESC|RF|RFPL|RFSBOX"
-        + ")-[0-9]+", "g");
-var bugzillaRe = new RegExp("(BZ|Bug)[ #\\-]?[0-9]+", "gi");
+var trackers = [
+    {
+        id: "jbossJira",
+        regExp: new RegExp("("
+                /* GateIn */
+                + "GTNPORTAL|GTNCOMMON|GTNWCM"
+                /* Hawkular */
+                + "|HAWKULAR|HWKAGENT|HWKALERTS|HWKBTM|HWKINVENT|HWKMETRICS"
+                /* Keycloak */
+                + "|KEYCLOAK"
+                /* JBoss Tools */
+                + "|JBIDE|JBDS|TOOLSDOC"
+                /* JBoss AS, EAP */
+                + "|AS7|JBAS|JBPAPP6|JBEAP"
+                /* WildFly and its deps */
+                + "|WFLY|WFCORE|UNDERTOW"
+                + "|DMR|EJBCLIENT|EMB"
+                + "|HAL|HIBERNATE"
+                + "|JBADMCON|JBMANCON|JBASMP|JBASM|JBBOOT|JBCLUSTER|JBEE|JBMETA|JBPROFILE|JBTM|LOGMGR|MODULES"
+                + "|RELOADED|MSC|SVCBIND|WFARQ|WFCOM|WFTC"
+                /* Misc */
+                + "|ARQ|ARQGRA|JBQA|JBPAPP|FORGE|FORGEPLUGINS|JDF|MODE|SHRINKRES|SHRINKWRAP|SHRINKDESC|RF|RFPL|RFSBOX"
+                + ")-[0-9]+", "g"),
+        getIssueIds: function (string) {
+            return string.match(this.regExp);
+        },
+        getLinkUrl: function (id) {
+            return "https://issues.jboss.org/browse/"+ id;
+        },
+        getLinkText: function (id) {
+            return id;
+        }
+    },
+    {
+        id: "redHatBugzilla",
+        regExp: new RegExp("(BZ|Bug)[ #\\-]?[0-9]+", "gi"),
+        idRegExp: new RegExp("[0-9]+$"),
+        getIssueIds: function (string) {
+            var rawIds = string.match(this.regExp);
+            if (rawIds) {
+                for (var i = 0; i < rawIds.length; i++) {
+                    rawIds[i] = rawIds[i].match(this.idRegExp);
+                }
+            }
+            return rawIds;
+        },
+        getLinkUrl: function (id) {
+            return "https://bugzilla.redhat.com/show_bug.cgi?id="+ id;
+        },
+        getLinkText: function (id) {
+            return "BZ#" + id;
+        }
+    },
+];
 
 function traverseDom(node, func) {
     var endA = false;
@@ -39,39 +72,25 @@ function traverseDom(node, func) {
     }
 }
 
-function linkJira(node) {
+function handleNode(node) {
     if (node.nodeType == 3 && node.nodeValue.trim().length > 0) {
-            var matches = node.nodeValue.match(jiraRe);
-            if (matches) {
-                for (var i = 0; i < matches.length; i++) {
+        for (var j = 0; j < trackers.length; j++) {
+            var tracker = trackers[j];
+            var ids = tracker.getIssueIds(node.nodeValue);
+            if (ids) {
+                for (var i = 0; i < ids.length; i++) {
                     var newA = document.createElement("a");
-                    newA.href = "https://issues.jboss.org/browse/"+ matches[i];
+                    newA.href = tracker.getLinkUrl(ids[i]);
                     newA.className = "JBossJiraContentScriptBlock";
                     newA.target = "_blank";
-                    newA.innerHTML = matches[i];
+                    newA.innerHTML = tracker.getLinkText(ids[i]);
                     var insertBefore = currentA ? currentA : node;
                     insertBefore.parentNode.insertBefore(newA, insertBefore);
                 }
             }
-            matches = node.nodeValue.match(bugzillaRe);
-            if (matches) {
-                for (var i = 0; i < matches.length; i++) {
-                    var bugId = matches[i].match(new RegExp("[0-9]+$"));
-                    var newA = document.createElement("a");
-                    newA.href = "https://bugzilla.redhat.com/show_bug.cgi?id="+ bugId;
-                    newA.className = "JBossJiraContentScriptBlock";
-                    newA.target = "_blank";
-                    newA.innerHTML = "BZ#"+ bugId;
-                    var insertBefore = currentA ? currentA : node;
-                    insertBefore.parentNode.insertBefore(newA, insertBefore);
-                }
-            }
+        }
     }
 }
 
-var nodeHandlers = function (node) {
-    linkJira(node);
-};
-
-traverseDom(document.body, nodeHandlers);
+traverseDom(document.body, handleNode);
 
