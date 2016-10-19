@@ -53,7 +53,22 @@ var trackers = [
             return "BZ#" + id;
         }
     },
-];
+    {
+        id: "hibernateJira",
+        regExp: new RegExp("("
+                /* Hibernate ORM */
+                + "HHH"
+                + ")-[0-9]+", "g"),
+        getIssueIds: function (string) {
+            return string.match(this.regExp);
+        },
+        getLinkUrl: function (id) {
+            return "https://hibernate.atlassian.net/browse/"+ id;
+        },
+        getLinkText: function (id) {
+            return id;
+        }
+    },];
 
 function traverseDom(node, func) {
     var endA = false;
