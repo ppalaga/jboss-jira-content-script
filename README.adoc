@@ -3,13 +3,30 @@
 A Google Chrome extension which replaces plain text references to JBoss Jira issues and Red Hat Bugzilla bugs with links
 pointing to the related issues.
 
-== How to Run
+== How to run
 
 [source,shell]
 ----
 cd ~/git
-git clone https://github.com/ppalaga/jboss-jira-content-script.git
+git clone --origin upstream https://github.com/ppalaga/jboss-jira-content-script.git
 # Option 1: Chrome CLI
 google-chrome --load-extension=jboss-jira-content-script
 # Or option 2: follow http://developer.chrome.com/extensions/getstarted.html#unpacked
 ----
+
+== How to get notified about updates
+
+Either (a) activate watching on link:https://github.com/ppalaga/jboss-jira-content-script[] project or
+(b) follow link:https://twitter.com/ppalaga[@ppalaga] on Twitter.
+
+== How to update
+
+[source,shell]
+----
+cd ~/git/jboss-jira-content-script
+git checkout master
+git fetch upstream # upstream is https://github.com/ppalaga/jboss-jira-content-script.git
+git reset --hard upstream/master
+----
+
+After the fetch/reset, visit link:chrome://extensions/[chrome://extensions/] in Google Chrome and Reload with `CTRL+R`.
