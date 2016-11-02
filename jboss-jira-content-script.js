@@ -90,20 +90,32 @@ function traverseDom(node, func) {
 
 function handleNode(node) {
     if (node.nodeType == 3 && node.nodeValue.trim().length > 0) {
+        var linkDiv;
+        var linkDivChildrenCount = 0;
         for (var j = 0; j < trackers.length; j++) {
             var tracker = trackers[j];
             var ids = tracker.getIssueIds(node.nodeValue);
             if (ids) {
+                if (!linkDiv) {
+                    linkDiv = document.createElement("div");
+                }
+                linkDiv.className = "JBossJiraContentScriptBlock";
                 for (var i = 0; i < ids.length; i++) {
                     var newA = document.createElement("a");
                     newA.href = tracker.getLinkUrl(ids[i]);
-                    newA.className = "JBossJiraContentScriptBlock";
                     newA.target = "_blank";
                     newA.innerHTML = tracker.getLinkText(ids[i]);
-                    var insertBefore = currentA ? currentA : node;
-                    insertBefore.parentNode.insertBefore(newA, insertBefore);
+                    if (linkDivChildrenCount > 0) {
+                        linkDiv.appendChild(document.createTextNode(" "));
+                    }
+                    linkDivChildrenCount++;
+                    linkDiv.appendChild(newA);
                 }
             }
+        }
+        if (linkDiv) {
+            var insertBefore = currentA ? currentA : node;
+            insertBefore.parentNode.insertBefore(linkDiv, insertBefore);
         }
     }
 }
