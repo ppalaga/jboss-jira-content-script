@@ -19,7 +19,8 @@ var trackers = [
                 + "|DMR|EJBCLIENT|EMB"
                 + "|HAL|HIBERNATE"
                 + "|JBADMCON|JBMANCON|JBASMP|JBASM|JBBOOT|JBCLUSTER|JBEE|JBMETA|JBPROFILE|JBTM|LOGMGR|MODULES"
-                + "|RELOADED|MSC|SVCBIND|WFARQ|WFCOM|WFTC"
+                + "|RELOADED|MSC"
+                + "|SECURITY|SVCBIND|WFARQ|WFCOM|WFTC"
                 /* Misc */
                 + "|ARQ|ARQGRA|JBQA|JBPAPP|FORGE|FORGEPLUGINS|JDF|MODE|SHRINKRES|SHRINKWRAP|SHRINKDESC|RF|RFPL|RFSBOX"
                 + ")-[0-9]+", "g"),
