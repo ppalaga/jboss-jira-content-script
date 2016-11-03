@@ -30,3 +30,8 @@ git reset --hard upstream/master
 ----
 
 After the fetch/reset, visit link:chrome://extensions/[chrome://extensions/] in Google Chrome and Reload with `CTRL+R`.
+
+== Known issues
+
+* Sometimes, on some GitHub pages, the links are not rendered when the page is loaded for the first time. Reloading with
+  F5 always helped so far.
