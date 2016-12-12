@@ -19,6 +19,7 @@ var trackers = [
                 + "|DMR|EJBCLIENT|EMB"
                 + "|HAL|HIBERNATE"
                 + "|JBADMCON|JBMANCON|JBASMP|JBASM|JBBOOT|JBCLUSTER|JBEE|JBMETA|JBPROFILE|JBTM|LOGMGR|MODULES"
+                + "|REM3"
                 + "|RELOADED|MSC"
                 + "|SECURITY|SVCBIND|WFARQ|WFCOM|WFTC"
                 /* Misc */
