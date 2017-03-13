@@ -23,7 +23,10 @@ var trackers = [
                 + "|RELOADED|MSC"
                 + "|SECURITY|SVCBIND|WFARQ|WFCOM|WFTC"
                 /* Misc */
-                + "|ARQ|ARQGRA|JBQA|JBPAPP|FORGE|FORGEPLUGINS|JDF|MODE|SHRINKRES|SHRINKWRAP|SHRINKDESC|RF|RFPL|RFSBOX"
+                + "|ARQ|ARQGRA|JBQA|JBPAPP|FORGE|FORGEPLUGINS|JDF|MODE"
+                + "|SHRINKRES|SHRINKWRAP|SHRINKDESC"
+                + "|SWARM"
+                + "|RF|RFPL|RFSBOX"
                 + ")-[0-9]+", "g"),
         getIssueIds: function (string) {
             return string.match(this.regExp);
