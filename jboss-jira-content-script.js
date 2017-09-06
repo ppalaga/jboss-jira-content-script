@@ -4,8 +4,10 @@ var trackers = [
     {
         id: "jbossJira",
         regExp: new RegExp("("
+                /* Camel/Fuse */
+                + "ENTESB"
                 /* GateIn */
-                + "GTNPORTAL|GTNCOMMON|GTNWCM"
+                + "|GTNPORTAL|GTNCOMMON|GTNWCM"
                 /* Hawkular */
                 + "|HAWKULAR|HWKAGENT|HWKALERTS|HWKBTM|HWKINVENT|HWKMETRICS"
                 /* Keycloak */
