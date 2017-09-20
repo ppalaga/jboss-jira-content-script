@@ -75,6 +75,22 @@ var trackers = [
         getLinkText: function (id) {
             return id;
         }
+    },
+    {
+        id: "asfJira",
+        regExp: new RegExp("("
+                /* Camel */
+                + "CAMEL"
+                + ")-[0-9]+", "g"),
+        getIssueIds: function (string) {
+            return string.match(this.regExp);
+        },
+        getLinkUrl: function (id) {
+            return "https://issues.apache.org/jira/browse/"+ id;
+        },
+        getLinkText: function (id) {
+            return id;
+        }
     },];
 
 function traverseDom(node, func) {
