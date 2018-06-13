@@ -23,7 +23,8 @@ var trackers = [
                 + "|JBADMCON|JBMANCON|JBASMP|JBASM|JBBOOT|JBCLUSTER|JBEE|JBMETA|JBPROFILE|JBTM|LOGMGR|MODULES"
                 + "|REM3"
                 + "|RELOADED|MSC"
-                + "|SECURITY|SVCBIND|WFARQ|WFCOM|WFTC"
+                + "|SECURITY|SVCBIND|WFARQ"
+                + "|WFCOM|WFGP|WFTC"
                 /* Misc */
                 + "|ARQ|ARQGRA|JBQA|JBPAPP|FORGE|FORGEPLUGINS|JDF|MODE"
                 + "|SHRINKRES|SHRINKWRAP|SHRINKDESC"
